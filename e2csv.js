@@ -4,7 +4,7 @@ var request = require('request'),
 var config = require('./env.js')
 
 // Elasticsearch setup
-var elasticUrl = config.elUrl + '/' + config.index + '/_search'
+var elasticUrl = config.elUrl + '/' + config.index + '/' + config.type + '/_search'
 var postContent = config.postContent
 var csvFile = config.filename
 
@@ -47,8 +47,8 @@ function getElasticsearch(options, cb) {
 
         var sheetdata = docs.map(e => {
             var obj = {}
-            obj._index = e._index
-            obj._type = e._type
+//            obj._index = e._index
+//            obj._type = e._type
             obj._id = e._id
             for (var key in e._source) {
                 obj[key] = e._source[key]
