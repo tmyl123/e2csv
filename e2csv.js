@@ -2,6 +2,8 @@ var fs = require('fs'),
     Json2csvParser = require('json2csv').Parser,
     elasticsearch = require('elasticsearch');
 
+var opts = { flatten: true }
+
 var config = require('./env.js')
 
 var client = new elasticsearch.Client({
@@ -15,7 +17,7 @@ var csvFile = config.filename
 getElasticsearch(config.index, config.postContent, function(elasticData) {
     console.log(elasticData)
     try {
-        const parser = new Json2csvParser();
+        const parser = new Json2csvParser(opts);
         const csv = parser.parse(elasticData);
         console.log(csv);
 
