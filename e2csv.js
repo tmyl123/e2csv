@@ -1,29 +1,19 @@
-var request = require('request'),
-    fs = require('fs')
+var fs = require('fs'),
+    Json2csvParser = require('json2csv').Parser,
+    elasticsearch = require('elasticsearch');
 
 var config = require('./env.js')
 
-// Elasticsearch setup
-var elasticUrl = config.elUrl + '/' + config.index + '/' + config.type + '/_search'
-var postContent = config.postContent
+var client = new elasticsearch.Client({
+    host: config.elasticHost,
+    log: 'trace'
+});
+
 var csvFile = config.filename
 
-var options = {
-    url: elasticUrl,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    json: postContent
-}
 
-
-
-getElasticsearch(options, function(elasticData) {
+getElasticsearch(config.index, config.postContent, function(elasticData) {
     console.log(elasticData)
-        //    e2g(creds, sheetId, elasticData)
-    const Json2csvParser = require('json2csv').Parser;
-
-
     try {
         const parser = new Json2csvParser();
         const csv = parser.parse(elasticData);
@@ -39,25 +29,21 @@ getElasticsearch(options, function(elasticData) {
 })
 
 
-function getElasticsearch(options, cb) {
-    request.post(options, function(err, res, body) {
-        if (err) console.log(err)
-        console.log(body)
-        var docs = body.hits.hits
-
+function getElasticsearch(index, postContent, cb) {
+    client.search({
+        index: index,
+        body: postContent
+    }, function(err, resp) {
+        console.log(resp)
+        var docs = resp.hits.hits
         var sheetdata = docs.map(e => {
             var obj = {}
-//            obj._index = e._index
-//            obj._type = e._type
             obj._id = e._id
             for (var key in e._source) {
                 obj[key] = e._source[key]
             }
             return obj
         })
-
-        cb(
-            sheetdata
-        )
-    })
+        cb(sheetdata)
+    });
 }

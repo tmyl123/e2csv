@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "elasticsearch": "^15.2.0",
     "json2csv": "^4.3.0",
     "request": "^2.88.0"
   }
