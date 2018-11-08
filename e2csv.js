@@ -4,12 +4,12 @@ var request = require('request'),
 var config = require('./env.js')
 
 // Elasticsearch setup
-var searchUrl = config.elUrl + '/' + config.index + '/_search'
+var elasticUrl = config.elUrl + '/' + config.index + '/_search'
 var postContent = config.postContent
 var csvFile = config.filename
 
 var options = {
-    url: searchUrl,
+    url: elasticUrl,
     headers: {
         'Content-Type': 'application/json'
     },
