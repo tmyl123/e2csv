@@ -1,27 +1,3 @@
-# e2csv
-
-#### Download
-
-```git clone https://github.com/tmyl123/e2csv.git```
-
-
-
-#### Install
-
-```npm install```
-
-
-
-#### Setup
-
-``` cp env.js.default env.js```
-
-``` node e2csv.js```
-
-
-#### Example output csv as bellow
-
-```
 "_index","_type","_id","name","age","objval","foo.foo","qqq.foo","obj1","extra.ccc"
 "school","students","ZeAf8WYB7D4Q1Re9983t","Bob","2","{age: 1}","","","",""
 "school","students","Z-Af8WYB7D4Q1Re9983t","Coco","10","","","","",""
@@ -36,5 +12,3 @@
 "school","students","a-Af8WYB7D4Q1Re9983t","Tima","34","","","","",""
 "school","students","bOAf8WYB7D4Q1Re9983t","QQ","6","","","","",""
 "school","students","iOCX8mYB7D4Q1Re9Ws2-","1","","","","","",""
-```
-

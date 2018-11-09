@@ -40,7 +40,9 @@ function getElasticsearch(index, postContent, cb) {
         var docs = resp.hits.hits
         var sheetdata = docs.map(e => {
             var obj = {}
-            obj._id = e._id
+            obj._index = e._index
+            obj._type  = e._type
+            obj._id    = e._id
             for (var key in e._source) {
                 obj[key] = e._source[key]
             }
