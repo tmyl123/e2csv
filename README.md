@@ -1,11 +1,26 @@
 # e2csv
 
+#### Download
+
+```git clone https://github.com/tmyl123/e2csv.git```
+
+
+
+#### Install
+
+```npm install```
+
+
+
+#### Setup
+
 ``` cp env.js.default env.js```
 
 ``` node e2csv.js```
 
 
-#### Example csv as bellow
+#### Example output csv as bellow
+
 ```
 "_id","name","age"
 "ZeAf8WYB7D4Q1Re9983t","Bob",2
